@@ -15,12 +15,6 @@ class P1_twoSum {
                 }
             }
         }
-
-        int[] sums = new int[nums.length * nums.length];
-        for(int i = 0; i < nums.length; i++) {
-            
-        }
-
         return nums;
     }
 }
