@@ -1,5 +1,3 @@
-import java.util.ArrayList;
-
 class TreeNode {
     int val;
     TreeNode left;
@@ -38,23 +36,19 @@ public class P129_sumRootToLeafNum {
     }
 
     public static int sumNumbers(TreeNode root) {
-        ArrayList<Integer> nums = new ArrayList<>();
-        sumNumbers(root, 0, nums);
-        int result = 0;
-        for(int x : nums) {
-            result += x;
-        }
-        return result;
+        return sumNumbers(root, 0);
     }
 
-    public static void sumNumbers(TreeNode root, int val, ArrayList<Integer> nums) {
+    public static int sumNumbers(TreeNode root, int val) {
+        if(root == null) { return val; }
         int newVal = addNum(val, root.val);
-        if((root.left == null) && (root.right == null)) {
-            nums.add(newVal);
-            return;
+        if(root.left == null) {
+            return sumNumbers(root.right, newVal); 
         }
-        if(root.left != null) { sumNumbers(root.left, newVal, nums); }
-        if(root.right != null) { sumNumbers(root.right, newVal, nums); }
+        if(root.right == null) {
+            return sumNumbers(root.left, newVal); 
+        }
+        return sumNumbers(root.left, newVal) + sumNumbers(root.right, newVal); 
     }
 
     public static int addNum(int a, int b) {
